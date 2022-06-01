@@ -350,22 +350,6 @@ The output should be something similar to this.
   "Resources": [
     {
       "resource": {
-        "junos-qfx_vlan-trunk-port": {
-          "config-group-name": {
-            "port_speed": "foo0",
-            "resource_name": "config-group-name",
-            "port_duplex": "foo3",
-            "port_mtu": "foo4",
-            "port_name": "foo5",
-            "port_native_vlan": "foo6",
-            "port_desc": "foo7",
-            "port_vlan": "foo8"
-          }
-        }
-      }
-    },
-    {
-      "resource": {
         "junos-qfx_commit": {
           "config-group-name": {
             "resource_name": "config-group-name"
@@ -377,14 +361,14 @@ The output should be something similar to this.
       "resource": {
         "junos-qfx_inet-iface": {
           "config-group-name": {
-            "commit": false,
-            "iface_desc": "foo13",
-            "iface_inet_address": "foo14",
-            "iface_unit": "foo15",
+            "iface_inet_address": "foo2",
+            "iface_mtu": "foo3",
+            "iface_speed": "foo4",
+            "iface_unit": "foo5",
             "resource_name": "config-group-name",
-            "iface_mtu": "foo17",
-            "iface_name": "foo18",
-            "iface_speed": "foo19"
+            "commit": false,
+            "iface_desc": "foo9",
+            "iface_name": "foo10"
           }
         }
       }
@@ -394,11 +378,11 @@ The output should be something similar to this.
         "junos-qfx_native-bgp-peer": {
           "config-group-name": {
             "resource_name": "config-group-name",
-            "bgp_group": "foo21",
-            "bgp_local_as": "foo22",
-            "bgp_neighbor": "foo23",
-            "bgp_peer_as": "foo24",
-            "bgp_peer_type": "foo25",
+            "bgp_group": "foo12",
+            "bgp_local_as": "foo13",
+            "bgp_neighbor": "foo14",
+            "bgp_peer_as": "foo15",
+            "bgp_peer_type": "foo16",
             "commit": false
           }
         }
@@ -408,12 +392,12 @@ The output should be something similar to this.
       "resource": {
         "junos-qfx_vlan": {
           "config-group-name": {
-            "commit": false,
             "resource_name": "config-group-name",
-            "vlan_desc": "foo31",
-            "vlan_l3iface": "foo32",
-            "vlan_name": "foo33",
-            "vlan_num": "foo34"
+            "vlan_desc": "foo20",
+            "vlan_l3iface": "foo21",
+            "vlan_name": "foo22",
+            "vlan_num": "foo23",
+            "commit": false
           }
         }
       }
@@ -422,17 +406,329 @@ The output should be something similar to this.
       "resource": {
         "junos-qfx_vlan-access-port": {
           "config-group-name": {
-            "port_duplex": "foo35",
-            "port_mtu": "foo36",
-            "port_vlan": "foo37",
-            "resource_name": "config-group-name",
-            "port_speed": "foo39",
+            "port_desc": "foo26",
+            "port_mtu": "foo27",
+            "port_speed": "foo28",
+            "port_vlan": "foo29",
             "commit": false,
-            "port_desc": "foo42",
-            "port_name": "foo43"
+            "resource_name": "config-group-name",
+            "port_duplex": "foo33",
+            "port_name": "foo34"
           }
         }
       }
+    },
+    {
+      "resource": {
+        "junos-qfx_vlan-trunk-port": {
+          "config-group-name": {
+            "port_native_vlan": "foo35",
+            "port_speed": "foo36",
+            "resource_name": "config-group-name",
+            "port_duplex": "foo38",
+            "port_mtu": "foo39",
+            "port_name": "foo40",
+            "port_vlan": "foo41",
+            "port_desc": "foo43"
+          }
+        }
+      }
+    }
+  ],
+  "JSONSchema": [
+    {
+      "$schema": "http://json-schema.org/schema#",
+      "properties": {
+        "resource": {
+          "properties": {
+            "junos-qfx_commit": {
+              "properties": {
+                "config-group-name": {
+                  "properties": {
+                    "resource_name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "required": [
+                "config-group-name"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "junos-qfx_commit"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "resource"
+      ],
+      "type": "object"
+    },
+    {
+      "$schema": "http://json-schema.org/schema#",
+      "properties": {
+        "resource": {
+          "properties": {
+            "junos-qfx_inet-iface": {
+              "properties": {
+                "config-group-name": {
+                  "properties": {
+                    "commit": {
+                      "type": "boolean"
+                    },
+                    "iface_desc": {
+                      "type": "string"
+                    },
+                    "iface_inet_address": {
+                      "type": "string"
+                    },
+                    "iface_mtu": {
+                      "type": "string"
+                    },
+                    "iface_name": {
+                      "type": "string"
+                    },
+                    "iface_speed": {
+                      "type": "string"
+                    },
+                    "iface_unit": {
+                      "type": "string"
+                    },
+                    "resource_name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "required": [
+                "config-group-name"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "junos-qfx_inet-iface"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "resource"
+      ],
+      "type": "object"
+    },
+    {
+      "$schema": "http://json-schema.org/schema#",
+      "properties": {
+        "resource": {
+          "properties": {
+            "junos-qfx_native-bgp-peer": {
+              "properties": {
+                "config-group-name": {
+                  "properties": {
+                    "bgp_group": {
+                      "type": "string"
+                    },
+                    "bgp_local_as": {
+                      "type": "string"
+                    },
+                    "bgp_neighbor": {
+                      "type": "string"
+                    },
+                    "bgp_peer_as": {
+                      "type": "string"
+                    },
+                    "bgp_peer_type": {
+                      "type": "string"
+                    },
+                    "commit": {
+                      "type": "boolean"
+                    },
+                    "resource_name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "required": [
+                "config-group-name"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "junos-qfx_native-bgp-peer"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "resource"
+      ],
+      "type": "object"
+    },
+    {
+      "$schema": "http://json-schema.org/schema#",
+      "properties": {
+        "resource": {
+          "properties": {
+            "junos-qfx_vlan": {
+              "properties": {
+                "config-group-name": {
+                  "properties": {
+                    "commit": {
+                      "type": "boolean"
+                    },
+                    "resource_name": {
+                      "type": "string"
+                    },
+                    "vlan_desc": {
+                      "type": "string"
+                    },
+                    "vlan_l3iface": {
+                      "type": "string"
+                    },
+                    "vlan_name": {
+                      "type": "string"
+                    },
+                    "vlan_num": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "required": [
+                "config-group-name"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "junos-qfx_vlan"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "resource"
+      ],
+      "type": "object"
+    },
+    {
+      "$schema": "http://json-schema.org/schema#",
+      "properties": {
+        "resource": {
+          "properties": {
+            "junos-qfx_vlan-access-port": {
+              "properties": {
+                "config-group-name": {
+                  "properties": {
+                    "commit": {
+                      "type": "boolean"
+                    },
+                    "port_desc": {
+                      "type": "string"
+                    },
+                    "port_duplex": {
+                      "type": "string"
+                    },
+                    "port_mtu": {
+                      "type": "string"
+                    },
+                    "port_name": {
+                      "type": "string"
+                    },
+                    "port_speed": {
+                      "type": "string"
+                    },
+                    "port_vlan": {
+                      "type": "string"
+                    },
+                    "resource_name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "required": [
+                "config-group-name"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "junos-qfx_vlan-access-port"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "resource"
+      ],
+      "type": "object"
+    },
+    {
+      "$schema": "http://json-schema.org/schema#",
+      "properties": {
+        "resource": {
+          "properties": {
+            "junos-qfx_vlan-trunk-port": {
+              "properties": {
+                "config-group-name": {
+                  "properties": {
+                    "port_desc": {
+                      "type": "string"
+                    },
+                    "port_duplex": {
+                      "type": "string"
+                    },
+                    "port_mtu": {
+                      "type": "string"
+                    },
+                    "port_name": {
+                      "type": "string"
+                    },
+                    "port_native_vlan": {
+                      "type": "string"
+                    },
+                    "port_speed": {
+                      "type": "string"
+                    },
+                    "port_vlan": {
+                      "type": "string"
+                    },
+                    "resource_name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "required": [
+                "config-group-name"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "junos-qfx_vlan-trunk-port"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "resource"
+      ],
+      "type": "object"
     }
   ]
 }
