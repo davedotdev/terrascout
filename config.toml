@@ -1,0 +1,7 @@
+# TF Upload config for directories
+tfstaging = "/Users/dgee/Documents/GoDev/src/github.com/davedotdev/TerraScout/tmp"
+tfproviders = "/Users/dgee/Documents/GoDev/src/github.com/davedotdev/TerraScout/providers"
+tfupload = "/Users/dgee/Documents/GoDev/src/github.com/davedotdev/TerraScout/upload"
+tfdir = "/Users/dgee" #this is the location of the ~/.terraform.d/plugins dir
+
+flaskgenson = "http://localhost:5001/"
