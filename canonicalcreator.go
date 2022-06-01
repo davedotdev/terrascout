@@ -33,13 +33,14 @@ type JSONWrapper struct {
 }
 
 type Resource struct {
-	Instance       string `json:",omitempty"`
+	Instance       string
 	ResourceName   string
 	ResourceSchema string // This is the generated schema from the Resource
+	JSONSchema     string
 }
 
 // CreateCanonical receives the TFJsonSchema and spits out a canonical example
-func CreateCanonical(TFjsonSchema []byte, providerName string) (JSONWrapper, error) {
+func CreateCanonical(TFjsonSchema []byte, providerName, tfgensonURI string) (JSONWrapper, error) {
 
 	parsed := &tfjson.ProviderSchemas{}
 
@@ -190,6 +191,14 @@ func CreateCanonical(TFjsonSchema []byte, providerName string) (JSONWrapper, err
 			attributeStr += "}}}}"
 			// resourceStrings = append(resourceStrings, attributeStr)
 			res.Instance = attributeStr
+
+			jsonSchema, err := CreateJSONSchema(tfgensonURI, res.Instance)
+			if err != nil {
+				fmt.Print(err)
+				return JSONWrapper{}, err
+			}
+
+			res.JSONSchema = jsonSchema
 
 			resources.Resources = append(resources.Resources, res)
 		}

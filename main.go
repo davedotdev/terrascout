@@ -193,7 +193,7 @@ func TFProcess(cfg Config, j string, provVer string) (JSONWrapper, error) {
 	cmd1.Run()
 
 	// 5. Create JSON Canonical from TF Schema
-	canonicalResources, err := CreateCanonical(tfschemaJSON, provName)
+	canonicalResources, err := CreateCanonical(tfschemaJSON, provName, cfg.FlaskGenson)
 	if err != nil {
 		fmt.Println("Error creating Canonical Example: ", err)
 		return JSONWrapper{}, err
@@ -210,7 +210,7 @@ func TFProcess(cfg Config, j string, provVer string) (JSONWrapper, error) {
 }
 
 // CreateJSONSchema returns a string of JSON schema
-func CreateJSONSchema(cfg Config, jsonStr string) (string, error) {
+func CreateJSONSchema(uri string, jsonStr string) (string, error) {
 	// Call the Python web service (FlaskGenson) for JSON schema generation and return the result
 
 	// Create a Resty Client
@@ -222,7 +222,7 @@ func CreateJSONSchema(cfg Config, jsonStr string) (string, error) {
 		SetFormData(map[string]string{
 			"payload": jsonStr,
 		}).
-		Post(cfg.FlaskGenson)
+		Post(uri)
 
 	if err != nil {
 		return "", err
@@ -264,8 +264,9 @@ func PrintWrapper(a ...interface{}) {
 }
 
 type Output struct {
-	Schema    json.RawMessage
-	Resources json.RawMessage
+	Schema     json.RawMessage
+	Resources  json.RawMessage
+	JSONSchema json.RawMessage
 }
 
 func NewOutput(tfschema string, data []Resource) Output {
@@ -273,24 +274,27 @@ func NewOutput(tfschema string, data []Resource) Output {
 	output.Schema = json.RawMessage(tfschema)
 
 	// Process the resources to []byte
-
 	resourcesStr := "["
-
+	schemaStr := "["
 	lenResources := len(data)
 	resPrintCtr := 0
 
 	for _, v := range data {
 
 		resourcesStr += v.Instance
+		schemaStr += v.JSONSchema
 		if resPrintCtr < (lenResources - 1) {
 			resourcesStr += ", "
+			schemaStr += ", "
 		}
 
 		resPrintCtr++
 	}
 	resourcesStr += "]"
+	schemaStr += "]"
 
 	output.Resources = json.RawMessage(resourcesStr)
+	output.JSONSchema = json.RawMessage(schemaStr)
 
 	return output
 }
